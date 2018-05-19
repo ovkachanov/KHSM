@@ -91,7 +91,8 @@ RSpec.describe Game, type: :model do
     end
 
     it '.current_game_question' do
-      expect(game_w_questions.current_game_question).to eq(game_w_questions.game_questions[0])
+      game_w_questions.current_level = 7
+      expect(game_w_questions.current_game_question.text).to eq 'В каком году была космическая одиссея 177?'
     end
   end
 end
