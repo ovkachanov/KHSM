@@ -1,10 +1,3 @@
-# (c) goodprogrammer.ru
-#
-# Объявление фабрики для создания нужных в тестах объектов
-#
-# См. другие примеры на
-#
-# http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md
 FactoryBot.define do
   factory :question do
     # Последовательность уникальных текстов вопроса
@@ -20,7 +13,3 @@ FactoryBot.define do
     answer4 {"#{rand(2001)}"}
   end
 end
-
-# PS: неплохой фильмец
-#
-# https://ru.wikipedia.org/wiki/Космическая_одиссея_2001_года
