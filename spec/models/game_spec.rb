@@ -91,8 +91,11 @@ RSpec.describe Game, type: :model do
     end
 
     it '.current_game_question' do
+      game_w_questions.questions.where(level: 7).update_all(text: 'Кто такой Буратино?')
       game_w_questions.current_level = 7
-      expect(game_w_questions.current_game_question.text).to eq 'В каком году была космическая одиссея 177?'
+
+      expect(game_w_questions.current_game_question.text).to eq 'Кто такой Буратино?'
+      expect(game_w_questions.current_game_question.level).to eq 7
     end
   end
 end

@@ -16,6 +16,7 @@ class Game < ActiveRecord::Base
   # Массив игровых вопросов для этой игры. 15 вопросов для 15-ти уровней, в
   # каждый из них мы будем брать произвольный вопрос из общей базы вопросов.
   has_many :game_questions, dependent: :destroy
+  has_many :questions, through: :game_questions
 
   # У игры обязательно должен быть игрок
   validates :user, presence: true
