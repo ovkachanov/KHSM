@@ -87,6 +87,17 @@ RSpec.describe GamesController, type: :controller do
       expect(flash.empty?).to be_truthy
     end
 
+    it 'incorrect answer' do
+      put :answer, params: { id: game_w_questions.id, letter: "c" }
+
+      game = assigns(:game)
+
+      expect(game.status).to eq(:fail)
+      expect(game.finished?).to be_truthy
+      expect(response).to redirect_to(user_path(user))
+      expect(flash[:alert]).to be
+    end
+
     it "take money" do
       game_w_questions.update_attribute(:current_level, 2)
       put :take_money, params: { id: game_w_questions.id }
