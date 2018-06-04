@@ -151,13 +151,24 @@ class Game < ActiveRecord::Base
   # :won — игра выиграна (все 15 вопросов покорены)
   # :money — игра завершена, игрок забрал деньги
   # :in_progress — игра еще идет
+  #
+
+  def use_help(help_type)
+    help_types = %i(fifty_fifty audience_help friend_call)
+    help_type = help_type.to_sym
+    raise ArgumentError.new('wrong help_type') unless help_types.include?(help_type)
+
+    unless self["#{help_type}_used"]
+      self["#{help_type}_used"] = true
+      current_game_question.apply_help!(help_type)
+      save
+    end
+  end
+
   def status
     return :in_progress unless finished?
 
     if is_failed
-      # TODO: дорогой ученик! Если TIME_LIMIT в будущем изменится, статусы
-      # старых, уже сыгранных игр могут измениться. Подумайте как это исправить!
-      # Ответ найдете в файле настроек вашего тестового окружения.
       (finished_at - created_at) > TIME_LIMIT ? :timeout : :fail
     elsif current_level > Question::QUESTION_LEVELS.max
       :won
