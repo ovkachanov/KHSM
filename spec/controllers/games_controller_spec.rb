@@ -132,9 +132,6 @@ RSpec.describe GamesController, type: :controller do
       put :help, params: { id: game_w_questions.id, help_type: :fifty_fifty }
       game = assigns(:game)
 
-      expect(game.finished?).to be_falsey
-      expect(game.fifty_fifty_used).to be_truthy
-
       game.current_game_question.add_fifty_fifty
 
       expect(game.finished?).to be_falsey
