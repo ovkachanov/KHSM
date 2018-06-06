@@ -37,6 +37,8 @@ group :test do
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
